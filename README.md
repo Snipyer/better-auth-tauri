@@ -188,6 +188,28 @@ export function Page() {
 }
 ```
 
+## Social Account Linking
+
+Better Auth account linking is enabled by default. To link an additional social provider from a Tauri app with the Opener plugin, use the `linkSocial` helper:
+
+```ts
+import { linkSocial } from "@daveyplate/better-auth-tauri"
+import { authClient } from "@/lib/auth-client"
+
+export function Page() {
+  return (
+    <button onClick={() => {
+      linkSocial({
+        authClient,
+        provider: "google"
+      })
+    }}>
+      Link Google account
+    </button>
+  )
+}
+```
+
 ## macOS Cookies
 
 You must update your auth-client.ts to use Tauri HTTP plugin for macOS in production in order for cookies to work:

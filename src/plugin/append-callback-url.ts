@@ -1,6 +1,4 @@
-import type { MiddlewareContext, MiddlewareOptions } from "better-auth"
 import type { SocialProvider } from "better-auth/social-providers"
-import type { AuthContext } from "better-auth/types"
 
 export function appendCallbackURL({
     callbackURL,
@@ -9,12 +7,12 @@ export function appendCallbackURL({
     scheme
 }: {
     callbackURL: string
-    ctx: MiddlewareContext<MiddlewareOptions, AuthContext>
+    ctx: any
     debugLogs?: boolean
     scheme: string
 }) {
     if (!ctx.context.options.socialProviders) return
-    if (ctx.path !== "/sign-in/social") return
+    if (!["/sign-in/social", "/link-social"].includes(ctx.path)) return
 
     const platform = ctx.request?.headers.get("platform") || ""
 

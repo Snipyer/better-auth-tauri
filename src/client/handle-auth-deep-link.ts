@@ -13,8 +13,12 @@ export async function handleAuthDeepLink({
 
     const newUrl = new URL(url)
 
+    const schemeWithDoubleSlash = `${scheme}:/`
+    const schemeWithTripleSlash = `${scheme}:///`
+
     if (
         !url.startsWith(`${scheme}:/${basePath}`) &&
+        !url.startsWith(`${scheme}://${basePath}`) &&
         !newUrl.pathname.startsWith(basePath)
     )
         return false
@@ -22,7 +26,10 @@ export async function handleAuthDeepLink({
     const href = `/${
         newUrl.protocol.startsWith("http")
             ? url.replace(newUrl.origin, "").replace(basePath, "")
-            : url.replace(`${scheme}:/${basePath}`, "")
+            : url
+                  .replace(schemeWithDoubleSlash, "")
+                  .replace(schemeWithTripleSlash, "")
+                  .replace(basePath, "")
     }`
 
     if (debugLogs) {

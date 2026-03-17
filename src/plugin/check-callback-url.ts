@@ -1,6 +1,3 @@
-import type { MiddlewareContext, MiddlewareOptions } from "better-auth"
-import type { AuthContext } from "better-auth/types"
-
 export function checkCallbackURL({
     ctx,
     debugLogs,
@@ -8,7 +5,7 @@ export function checkCallbackURL({
     successURL,
     url
 }: {
-    ctx: MiddlewareContext<MiddlewareOptions, AuthContext>
+    ctx: any
     debugLogs?: boolean
     scheme: string
     successURL?: string
